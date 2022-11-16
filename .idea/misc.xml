@@ -4,14 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/border.xml" value="0.2075" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/button_border.xml" value="0.2445" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/cake_gif_iconxml.xml" value="0.2335" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/edit_border.xml" value="0.2075" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/gift_gif_iconxml.xml" value="0.1635" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/kakao_iconxml.xml" value="0.2075" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/kakao_login_border.xml" value="0.2075" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/login_border.xml" value="0.2075" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.160546875" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/activity_join.xml" value="0.176" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/activity_login.xml" value="0.2" />
-        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/activity_main.xml" value="0.18614130434782608" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/activity_main.xml" value="0.15710382513661203" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/activity_splash.xml" value="0.1403688524590164" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2335" />
       </map>
     </option>
   </component>

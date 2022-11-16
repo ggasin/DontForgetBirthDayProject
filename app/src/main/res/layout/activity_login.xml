@@ -4,80 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F5F7">
+    android:background="#F3F5F7"
+    tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/login_textView"
+        android:id="@+id/login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:text="로그인"
-        android:textColor="#31A9FC"
-        android:textSize="80dp"
+        android:textColor="@color/title_blue"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="600dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/edit_border"
-        android:ems="10"
-        android:hint="\t\t\t\비밀번호"
-        android:inputType="textPassword"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextId"
         app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/editTextId"
-        android:layout_width="600dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/edit_border"
-        android:hint="\t\t\t\아이디"
-        android:inputType="text"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_textView" />
 
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="600dp"
-        android:layout_height="100dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/login_border"
+        android:background="@drawable/button_border"
         android:text="로그인"
         android:textColor="@color/white"
-        android:textSize="40dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/login_pwd_layout"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/kakao_login_btn"
-        android:layout_width="600dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/login_border"
+        android:id="@+id/login_kakao_btn"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_border"
         android:backgroundTint="#FAE100"
         android:drawableLeft="@drawable/kakao_iconxml"
         android:paddingLeft="30dp"
-        android:paddingRight="79dp"
+        android:paddingRight="49dp"
         android:text="카카오톡으로 시작"
-        android:textSize="35dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,18 +58,20 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/join_text_btn"
+        android:id="@+id/go_join_text_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="회원가입"
-        android:textSize="30dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.77"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kakao_login_btn"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/login_kakao_btn"
+        app:layout_constraintVertical_bias="0.0"
+        android:clickable="true"
+        />
 
     <TextView
         android:id="@+id/findIdPwd_text_btn"
@@ -105,12 +79,57 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="아이디/비밀번호 찾기"
-        android:textSize="30dp"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.276"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kakao_login_btn"
+        app:layout_constraintTop_toBottomOf="@+id/login_kakao_btn"
         app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/login_id_layout"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/edit_border"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_title">
+
+        <EditText
+            android:id="@+id/login_edit_id"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:hint="아이디"
+            android:inputType="text"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/login_pwd_layout"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_border"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_id_layout">
+
+        <EditText
+            android:id="@+id/login_edit_pwd"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="비밀번호"
+            android:inputType="textPassword"
+            android:textSize="15dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
