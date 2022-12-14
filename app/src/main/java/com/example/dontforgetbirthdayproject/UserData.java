@@ -1,13 +1,13 @@
 package com.example.dontforgetbirthdayproject;
 
-public class MainData {
+public class UserData {
     private String tv_group;
     private String tv_name;
     private String tv_so_birth;
     private String tv_lu_birth;
     private String tv_memo;
 
-    public MainData(String tv_group, String tv_name, String tv_so_birth, String tv_lu_birth, String tv_memo) {
+    public UserData(String tv_group, String tv_name, String tv_so_birth, String tv_lu_birth, String tv_memo) {
         this.tv_group = tv_group;
         this.tv_name = tv_name;
         this.tv_so_birth = tv_so_birth;

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHolder> {
 
-    private ArrayList<MainData> arrayList;
+    private ArrayList<UserData> arrayList;
 
-    public HomeAdapter(ArrayList<MainData> arrayList) {
+    public HomeAdapter(ArrayList<UserData> arrayList) {
         this.arrayList = arrayList;
     }
 
