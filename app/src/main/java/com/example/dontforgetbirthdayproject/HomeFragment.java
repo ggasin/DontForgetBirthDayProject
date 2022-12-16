@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,9 @@ public class HomeFragment extends Fragment {
     private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+    private TextView textView;
     Button item_add_btn;
+    String userId;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,16 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(homeAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         item_add_btn = (Button)rootView.findViewById(R.id.item_add_btn);
+        textView = rootView.findViewById(R.id.textView3);
+        Bundle bundle = getArguments();
+
+        if(bundle!= null) {
+
+            String userId = bundle.getString("userId");
+            textView.setText(userId);
+        } else {
+            textView.setText(mainActivity.userId.toString());
+        }
         item_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

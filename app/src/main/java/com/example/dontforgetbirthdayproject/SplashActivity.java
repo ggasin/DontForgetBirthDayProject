@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 if(userID!=null && userPwd!=null){
                     Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SplashActivity.this,MainActivity.class);
-                    intent.putExtra("userID",userID);
+                    intent.putExtra("userId",userID);
                     intent.putExtra("userPwd",userPwd);
                     startActivity(intent);
                     finish();

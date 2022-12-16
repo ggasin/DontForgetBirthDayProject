@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ai_name_ly"
+            android:id="@+id/add_name_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -20,7 +20,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ai_name_et"
+                android:id="@+id/add_name_et"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
@@ -30,7 +30,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ai_group_ly"
+            android:id="@+id/add_group_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -38,7 +38,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ai_group_et"
+                android:id="@+id/add_group_et"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
@@ -47,7 +47,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ai_birth_ly"
+            android:id="@+id/add_birth_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -55,7 +55,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ai_birth_et"
+                android:id="@+id/add_solar_birth_et"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
@@ -64,7 +64,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ai_memo_ly"
+            android:id="@+id/add_memo_ly"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginTop="20dp"
@@ -72,7 +72,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ai_memo_et"
+                android:id="@+id/add_memo_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
@@ -83,7 +83,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ai_btn_ly"
+            android:id="@+id/add_btn_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
@@ -109,6 +109,7 @@
                 android:textColor="@color/white"
                 android:textSize="30dp" />
         </LinearLayout>
+
     </LinearLayout>
 
 </FrameLayout>

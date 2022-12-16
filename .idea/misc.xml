@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1405" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/alarm_toggle.xml" value="0.197" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/border.xml" value="0.2075" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/button_back.xml" value="0.1525" />
