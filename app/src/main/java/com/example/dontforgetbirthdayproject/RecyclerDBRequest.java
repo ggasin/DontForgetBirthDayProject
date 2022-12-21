@@ -9,18 +9,15 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterRequest extends StringRequest {
-
+public class RecyclerDBRequest extends StringRequest {
     //서버 url 설정(php 파일 연동)
-    final static private String URL = "http://dfmbd.ivyro.net/Register.php";
+    final static private String URL = "http://dfmbd.ivyro.net/RecyclerDB.php";
     private Map<String,String> map;
-    public RegisterRequest(String userID, String userPassword , String userName, String userPhone, Response .Listener<String> listener){
+    public RecyclerDBRequest(String itemId, String itemGroup, Response.Listener<String> listener){
         super(Method.POST, URL,listener,null);
         map = new HashMap<>();
-        map.put("userID",userID);
-        map.put("userPhone",userPhone);
-        map.put("userPassword",userPassword);
-        map.put("userName",userName);
+        map.put("itemId", itemId);
+        map.put("itemGroup", itemGroup);
 
     }
 

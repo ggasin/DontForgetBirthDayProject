@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -57,9 +58,11 @@ public class LoginActivity extends AppCompatActivity {
                                         autoLoginEdit.putString("userID", userID);
                                         autoLoginEdit.putString("userPwd", userPwd);
                                         autoLoginEdit.commit();
+                                        Log.d("userName",jsonObject.getString("userName"));
                                     }
                                     String UserID = jsonObject.getString("userID");
                                     String UserPwd = jsonObject.getString("userPassword");
+                                    Log.d("userName",jsonObject.getString("userName"));
                                     Toast.makeText(getApplicationContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                     intent.putExtra("userId",userID);

@@ -8,7 +8,7 @@
     tools:context=".RegisterActivity">
 
     <LinearLayout
-        android:id="@+id/join_check_pwd_layout"
+        android:id="@+id/rg_check_pwd_layout"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -17,10 +17,10 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/join_pwd_validation_text_layout">
+        app:layout_constraintTop_toTopOf="@+id/rg_pwd_validation_ly">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/join_check_pwd_textInputlayout"
+            android:id="@+id/rg_check_pwd_tily"
             android:layout_width="300dp"
             android:layout_height="50dp"
             app:hintEnabled="false"
@@ -39,7 +39,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/join_title"
+        android:id="@+id/rg_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/join_id_layout"
+        android:id="@+id/rg_id_ly"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -60,10 +60,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_edit_nickname_layout">
+        app:layout_constraintTop_toBottomOf="@+id/rg_edit_nickname_ly">
 
         <LinearLayout
-            android:id="@+id/join_edit_id_layout"
+            android:id="@+id/rg_edit_id_ly"
             android:layout_width="260dp"
             android:layout_height="match_parent"
             android:background="@drawable/edit_border"
@@ -109,17 +109,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/join_pwd_validation_text_layout"
+        android:id="@+id/rg_pwd_validation_ly"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/join_check_pwd_textInputlayout"
+        app:layout_constraintBottom_toTopOf="@+id/rg_check_pwd_tily"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_edit_pwd_layout">
+        app:layout_constraintTop_toBottomOf="@+id/rg_edit_pwd_ly">
 
         <TextView
-            android:id="@+id/join_pwd_validation_text"
+            android:id="@+id/rg_pwd_validation_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -128,7 +128,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/join_edit_nickname_layout"
+        android:id="@+id/rg_edit_nickname_ly"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
@@ -137,7 +137,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_title">
+        app:layout_constraintTop_toBottomOf="@+id/rg_title">
 
         <EditText
             android:id="@+id/rg_edit_nickname"
@@ -151,7 +151,30 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/join_edit_pwd_layout"
+        android:id="@+id/rg_edit_phone_ly"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edit_border"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_id_ly">
+
+        <EditText
+            android:id="@+id/rg_edit_phone"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:hint="핸드폰"
+            android:textSize="15dp">
+
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rg_edit_pwd_ly"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -160,10 +183,10 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_id_layout">
+        app:layout_constraintTop_toBottomOf="@+id/rg_edit_phone_ly">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/join_edit_textInputLayout"
+            android:id="@+id/rg_edit_tily"
             android:layout_width="300dp"
             android:layout_height="50dp"
             app:hintAnimationEnabled="false"

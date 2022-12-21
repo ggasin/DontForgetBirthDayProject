@@ -101,7 +101,7 @@ public class AddItemFragment extends Fragment {
                         }
                     }
                 };
-                ItemAddRequest itemAddRequest = new ItemAddRequest(id,name,group,solarBirth,lunarBirth,memo,1,responseListener);
+                ItemAddRequest itemAddRequest = new ItemAddRequest(id,group,name,solarBirth,lunarBirth,memo,1,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                 queue.add(itemAddRequest);
 

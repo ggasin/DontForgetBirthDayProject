@@ -23,8 +23,8 @@ import org.json.JSONObject;
 public class RegisterActivity extends AppCompatActivity {
 
     private Button join_complete_btn, id_check_btn;
-    private EditText et_id,et_pwd,et_name,et_pwd_chk;
-    private boolean is_id_ok, is_pwd_ok = false;
+    private EditText et_id,et_pwd,et_name,et_phone,et_pwd_chk;
+    private boolean is_id_ok, is_pwd_ok ,is_phone_ok= false;
     private AlertDialog dialog; // 알림화면 띄우기
 
     @Override
@@ -36,8 +36,10 @@ public class RegisterActivity extends AppCompatActivity {
         et_pwd = findViewById(R.id.rg_edit_pwd);
         et_name = findViewById(R.id.rg_edit_nickname);
         et_pwd_chk = findViewById(R.id.rg_edit_check_pwd);
+        et_phone = findViewById(R.id.rg_edit_phone);
         join_complete_btn = findViewById(R.id.rg_join_btn);
         id_check_btn = findViewById(R.id.rg_id_check_btn);
+
 
         //아이디 중복 체크 버튼 이벤트
         id_check_btn.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +100,25 @@ public class RegisterActivity extends AppCompatActivity {
                 is_id_ok=false;
             }
         });
+        et_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(et_phone.getText().length()>=10){
+                    is_phone_ok = true;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(et_phone.getText().length()<10){
+                    is_phone_ok = false;
+                }
+            }
+        });
         et_pwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -127,6 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userPwd = et_pwd.getText().toString();
                 String userName = et_name.getText().toString();
                 String userPwdCheck = et_pwd_chk.getText().toString();
+                String userPhone = et_phone.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -134,11 +156,12 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
-                            if(is_id_ok && userPwd.equals(userPwdCheck) && is_pwd_ok){
+                            if(is_id_ok && is_phone_ok&&userPwd.equals(userPwdCheck) && is_pwd_ok){
                                 if(success){
                                     Toast.makeText(getApplicationContext(),"가입 완료",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 } else{
                                     Toast.makeText(getApplicationContext(),"가입 실패",Toast.LENGTH_SHORT).show();
                                     return;
@@ -153,7 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-                RegisterRequest registerRequest = new RegisterRequest(userID,userPwd,userName,responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(userID,userPwd,userName,userPhone,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 
