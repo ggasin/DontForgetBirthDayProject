@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment fragmentHome = new HomeFragment();
     private MyPageFragement fragmentMyPage = new MyPageFragement();
     private AddItemFragment fragmentAddItem = new AddItemFragment();
-    private TextView textView;
-    String userId;
+
+    String userId,selectedGroup;
 
 
     @Override
@@ -45,13 +46,8 @@ public class MainActivity extends AppCompatActivity {
         //프래그먼트를 올리거나 교체하는 작업을 Transaction이라고 합니다.
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         HomeFragment homeFragment = new HomeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("userId",userId);
-        homeFragment.setArguments(bundle);
         transaction.replace(R.id.frameLayout, fragmentHome).commit();
-        textView = findViewById(R.id.textView4);
 
-        textView.setText(userId);
         BottomNavigationView bottomNavigationView = findViewById(R.id.menu_bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new ItemSelectedListener());
         bottomNavigationView.setSelectedItemId(R.id.home_menu);
@@ -88,13 +84,12 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentHome).commit();
         }
         else if(index==1){
+            Log.d("selectedGroup on Main",selectedGroup);
             Bundle bundle = new Bundle();
             bundle.putString("userId",userId);
             AddItemFragment addItemFragment = new AddItemFragment();
             addItemFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentAddItem).commit();
-
-
         }
     }
 }

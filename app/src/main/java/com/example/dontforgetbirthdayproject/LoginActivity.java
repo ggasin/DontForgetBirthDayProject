@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -22,6 +23,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
+    // 뒤로가기 이벤트 핸들러 변수
+    private final BackKeyHandler backKeyHandler = new BackKeyHandler(this);
+    //뒤로가기 두번 누르면 종료
+    @Override
+    public void onBackPressed() {
+        backKeyHandler.onBackPressed("'뒤로' 버튼을 두 번 누르면 종료됩니다.");
+    }
 
     private Button loginBtn;
     private TextView goJoinBtn;
@@ -31,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         loginBtn = findViewById(R.id.login_btn);
         goJoinBtn = findViewById(R.id.go_join_text_btn);

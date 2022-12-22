@@ -1,7 +1,6 @@
 package com.example.dontforgetbirthdayproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,17 +25,21 @@ import org.json.JSONObject;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-
+//아이템 추가 화면 fragment
 public class AddItemFragment extends Fragment {
     MainActivity mainActivity;
     private Button add_complete_btn,add_close_btn;
-    private EditText add_name_et,add_group_et,add_solar_birth_et,add_memo_et;
-    private TextView textView;
+    private EditText add_name_et,add_solar_birth_et,add_memo_et;
+    private TextView add_group_t;
+    private CheckBox add_lunar_chk;
+    String selectedGroup;
     //onAttach 는 fragment가 activity에 올라온 순간
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity) getActivity();
+        selectedGroup = mainActivity.selectedGroup;
+        Log.d("selectedGroup on Add",selectedGroup);
     }
 
     @Override
@@ -55,19 +59,32 @@ public class AddItemFragment extends Fragment {
         add_complete_btn = rootView.findViewById(R.id.add_complete_btn);
         add_close_btn = rootView.findViewById(R.id.add_close_btn);
         add_name_et = rootView.findViewById(R.id.add_name_et);
-        add_group_et = rootView.findViewById(R.id.add_group_et);
+        add_group_t = rootView.findViewById(R.id.add_group_t);
         add_solar_birth_et = rootView.findViewById(R.id.add_solar_birth_et);
         add_memo_et = rootView.findViewById(R.id.add_memo_et);
+        add_lunar_chk = rootView.findViewById(R.id.add_lunar_check_box);
+
+        //선택된 그룹 이름으로 group text 초기화
+        add_group_t.setText(selectedGroup);
+        Log.d("selectedGroup on Add1",selectedGroup);
+
+
         //완료 버튼 이벤트
         add_complete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = mainActivity.userId.toString();
+                String id = mainActivity.userId;
                 String name = add_name_et.getText().toString();
-                String group = add_group_et.getText().toString();
+                String group = add_group_t.getText().toString();
                 String solarBirth = add_solar_birth_et.getText().toString();
                 String memo = add_memo_et.getText().toString() ;
-                String lunarBirth = "198893";
+                String lunarBirth;
+                boolean isLunarChecked = add_lunar_chk.isChecked();
+                if(isLunarChecked){
+                    lunarBirth = "19981208"; //음력 미구현
+                } else {
+                    lunarBirth = "--";
+                }
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -111,6 +128,9 @@ public class AddItemFragment extends Fragment {
         add_close_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                add_name_et.setText("");
+                add_solar_birth_et.setText("");
+                add_memo_et.setText("");
                 mainActivity.onFragmentChange(0);
             }
         });

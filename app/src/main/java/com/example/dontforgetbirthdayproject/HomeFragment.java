@@ -7,18 +7,21 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,16 +59,14 @@ public class HomeFragment extends Fragment {
         super.onDetach();
         mainActivity = null;
     }
-
     private ArrayList<ItemData> itemList;
     private HomeAdapter homeAdapter;
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private TextView textView;
     private Spinner group_spinner;
-    private ImageButton refresh_btn;
     Button item_add_btn;
-    String userId;
+    String userId,selectedGroup;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,22 +91,17 @@ public class HomeFragment extends Fragment {
         item_add_btn = (Button)rootView.findViewById(R.id.item_add_btn);
         textView = rootView.findViewById(R.id.textView3);
         group_spinner = rootView.findViewById(R.id.group_spinner);
-        refresh_btn = rootView.findViewById(R.id.refresh_btn);
 
-        Bundle bundle = getArguments();
 
-        //리스트 저장 및 새로고침
-        if(bundle!= null) {
 
-            String userId = bundle.getString("userId");
-            textView.setText(userId);
-        } else {
-            textView.setText(group_spinner.getSelectedItem().toString());
-        }
+
+        //그룹 저장한 spinner 이벤트
         group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                textView.setText(adapterView.getItemAtPosition(position).toString());
+                selectedGroup = adapterView.getItemAtPosition(position).toString();
+                mainActivity.selectedGroup = selectedGroup;
+                textView.setText(mainActivity.selectedGroup);
                 loadDB(URL,adapterView.getItemAtPosition(position).toString());
             }
 
@@ -113,29 +110,45 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        loadDB(URL,group_spinner.getSelectedItem().toString());
 
-        refresh_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //결과를 JsonArray 받을 것이므로..
-                //StringRequest가 아니라..
-                //JsonArrayRequest를 이용할 것임
-                loadDB(URL,group_spinner.getSelectedItem().toString());
-
-            }
-        });
+        //db로부터 데이터를 가져와 recyclerView에 바인딩
+        loadDB(URL, group_spinner.getSelectedItem().toString());
 
 
         item_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.onFragmentChange(1);
+                //MainActivity에 있는 onFragmentChange 함수에 접근
+                PopupMenu popup= new PopupMenu(getActivity().getApplicationContext(), view);//v는 클릭된 뷰를 의미
+
+                popup.getMenuInflater().inflate(R.menu.add_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.add_group_menu:
+                                Toast.makeText(getActivity().getApplicationContext(), "그룹추가", Toast.LENGTH_SHORT).show();
+                                break;
+                            case R.id.add_item_menu:
+                                Log.d("selectedGroup on home1",selectedGroup);
+                                Log.d("selectedGroup on home1",mainActivity.selectedGroup);
+                                mainActivity.onFragmentChange(1);
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+
             }
         });
 
         return rootView;
     }
+
+
     public void loadDB(String url,String group){
         StringRequest request = new StringRequest(
                             Request.Method.POST,
