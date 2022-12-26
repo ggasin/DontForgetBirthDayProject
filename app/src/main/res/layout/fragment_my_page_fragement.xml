@@ -11,35 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/mp_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="350dp"
-            android:background="?attr/actionBarItemBackground"
-            android:src="@drawable/back_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/mp_title_t"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="70dp"
             android:text="내 정보"
+            android:textColor="@color/title_blue"
             android:textSize="50dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/mp_info_ly"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +36,9 @@
 
             <LinearLayout
                 android:id="@+id/mp_name_ly"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -67,8 +57,9 @@
 
             <LinearLayout
                 android:id="@+id/mp_id_ly"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:orientation="horizontal">
 
@@ -88,8 +79,9 @@
 
             <LinearLayout
                 android:id="@+id/mp_phone_ly"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:orientation="horizontal">
 
@@ -121,6 +113,61 @@
             android:textSize="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mp_info_ly">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:text="알림 설정"
+                android:textColor="@color/title_blue"
+                android:textSize="50dp" />
+
+            <RadioGroup
+                android:id="@+id/mp_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checkedButton="@id/mp_alram_one_btn">
+
+                <RadioButton
+                    android:id="@+id/mp_alram_one_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="30dp"
+                    android:text="1일 전"
+                    android:textSize="25dp" />
+
+                <RadioButton
+                    android:id="@+id/mp_alram_three_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="30dp"
+                    android:text="3일 전"
+                    android:textSize="25dp" />
+
+                <RadioButton
+                    android:id="@+id/mp_alram_seven_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="30dp"
+                    android:text="1주일 전"
+                    android:textSize="25dp" />
+            </RadioGroup>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

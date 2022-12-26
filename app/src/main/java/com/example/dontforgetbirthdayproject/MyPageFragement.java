@@ -11,13 +11,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MyPageFragement extends Fragment {
     MainActivity mainActivity;
-    private TextView logout_text_btn;
+    private TextView logoutTextBtn;
+    private RadioGroup alramRadioGroup;
     //onAttach 는 fragment가 activity에 올라온 순간
     @Override
     public void onAttach(Context context) {
@@ -44,8 +47,24 @@ public class MyPageFragement extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_my_page_fragement, container, false);
-        logout_text_btn = rootView.findViewById(R.id.mp_logout_text_btn);
-        logout_text_btn.setOnClickListener(new View.OnClickListener() {
+        logoutTextBtn = rootView.findViewById(R.id.mp_logout_text_btn);
+        alramRadioGroup = rootView.findViewById(R.id.mp_radio_group);
+
+        alramRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if(checkedId == R.id.mp_alram_one_btn) {
+                    mainActivity.isAlramOne = true;
+                }
+                else if(checkedId == R.id.mp_alram_three_btn) {
+                    mainActivity.isAlramThree = true;
+                } else if(checkedId == R.id.mp_alram_seven_btn) {
+                    mainActivity.isAlramSeven = true;
+                }
+            }
+        });
+        //로그아웃 버튼 이벤트
+        logoutTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getApplicationContext(),LoginActivity.class);

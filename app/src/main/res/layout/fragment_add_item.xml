@@ -34,7 +34,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:hint="이름" />
+                android:hint="이름(중복X)" />
 
         </LinearLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="top|left"
-                android:hint="메모(최대 200자)"
+                android:hint="메모(최대 200자 공백가능)"
                 android:inputType="text|textMultiLine"
                 android:maxLength="200" />
         </LinearLayout>
