@@ -18,8 +18,11 @@
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/kakao_iconxml.xml" value="0.2075" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/kakao_login_border.xml" value="0.2075" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/login_border.xml" value="0.2075" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/memo_border.xml" value="0.128" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/menu_item_color.xml" value="0.161" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/popup_back.xml" value="0.106" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/profile_border.xml" value="0.128" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/progile_resize.xml" value="0.128" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/drawable/recycler_border.xml" value="0.197" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/font/font.xml" value="0.18854166666666666" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.160546875" />
@@ -32,6 +35,7 @@
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/birth_recycler_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/fragment_add_item.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/fragment_item_detail.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/fragment_my_page_fragement.xml" value="0.1253415300546448" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/fragment_setting.xml" value="0.16909722222222223" />
         <entry key="..\:/AndroidStudio/app/src/main/java/com/DontForgetBirthDayProject/app/src/main/res/layout/main_side_drawer.xml" value="0.11076388888888888" />

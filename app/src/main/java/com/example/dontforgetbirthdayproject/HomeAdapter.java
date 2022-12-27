@@ -14,10 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHolder> implements OnItemClickListener {
+
+
     private Context context;
     private ArrayList<ItemData> arrayList;
-
+    OnItemClickListener listener;
     public HomeAdapter(Context context,ArrayList<ItemData> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
@@ -44,14 +46,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
         } else {
             holder.sw_alram_on.setChecked(true);
         }
-
         holder.itemView.setTag(position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(),"sadasd",Toast.LENGTH_SHORT).show();
-            }
-        });
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -77,6 +72,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
         }
     }
 
+    public void setOnItemClicklistener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+    @Override
+    public void onItemClick(CustomViewHolder holder, View view, int position) {
+        if(listener != null){
+            listener.onItemClick(holder,view,position);
+        }
+    }
+    public ItemData getItem(int position){
+        return arrayList.get(position);
+    }
     public class CustomViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView tv_group;
@@ -93,6 +100,18 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
             this.tv_lu_birth = (TextView) itemView.findViewById(R.id.tv_lu_birth);
             this.tv_memo = (TextView) itemView.findViewById(R.id.tv_memo);
             this.sw_alram_on = (Switch) itemView.findViewById(R.id.sw_alram_btn);
+
+            // 아이템 클릭 이벤트 처리.
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getBindingAdapterPosition() ;
+                    if(listener != null){
+                        listener.onItemClick(CustomViewHolder.this, v, position);
+                    }
+                }
+            });
+
         }
     }
 }

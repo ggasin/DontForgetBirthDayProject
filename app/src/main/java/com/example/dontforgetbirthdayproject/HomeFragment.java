@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
     private Spinner group_spinner;
     private Button item_add_btn;
     private ImageButton itemAddBtn,itemDeleteBtn;
+
     String userId,selectedGroup;
     String CHANNEL_ID; //알림 채널 아이디
 
@@ -82,20 +84,28 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         itemList = new ArrayList<>();
-        if(itemList.isEmpty()){
-            Log.d("itemList is empty","empty");
-        } else {
-            for(int i=0;i<itemList.size();i++){
-                Log.d("itemList"+i,itemList.get(i).getTv_item_lunar_birth());
-            }
-        }
-
 
         textView = rootView.findViewById(R.id.textView3);
         group_spinner = rootView.findViewById(R.id.group_spinner);
         itemAddBtn = rootView.findViewById(R.id.item_add_btn);
         itemDeleteBtn = rootView.findViewById(R.id.item_delete_btn);
-
+        homeAdapter = new HomeAdapter(getActivity().getApplicationContext(),itemList);
+        //db로부터 데이터를 가져와 recyclerView에 바인딩
+        loadDB(URL, group_spinner.getSelectedItem().toString());
+        //아이템 클릭 이벤트
+        homeAdapter.setOnItemClicklistener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(HomeAdapter.CustomViewHolder holder, View view, int position) {
+                ItemData item = homeAdapter.getItem(position);
+                mainActivity.itemName = item.getTv_item_name();
+                mainActivity.itemGroup = item.getTv_item_group();
+                mainActivity.itemSolarBirth = item.getTv_item_solar_birth();
+                mainActivity.itemlunarBirth = item.getTv_item_lunar_birth();
+                mainActivity.itemMemo = item.getTv_item_memo();
+                mainActivity.onFragmentChange(2);
+                Log.d("아이템 클릭","클릭");
+            }
+        });
 
         //그룹 저장한 spinner 이벤트
         group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -113,8 +123,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //db로부터 데이터를 가져와 recyclerView에 바인딩
-        loadDB(URL, group_spinner.getSelectedItem().toString());
 
         //삭제 아이콘 클릭 이벤트트
        itemDeleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -167,7 +175,7 @@ public class HomeFragment extends Fragment {
                             itemList.clear();
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
-                                homeAdapter = new HomeAdapter(getActivity().getApplicationContext(),itemList);
+
                                 recyclerView.setAdapter(homeAdapter);
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -209,50 +217,5 @@ public class HomeFragment extends Fragment {
         //요청큐에 요청 객체 생성
         requestQueue.add(request);
     }
-    /*
-    public void loadDB(String URL){
-        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, URL, null, new Response.Listener<JSONArray>() {
-            //volley 라이브러리의 GET방식은 버튼 누를때마다 새로운 갱신 데이터를 불러들이지 않음. 그래서 POST 방식 사용
-            @Override
-            public void onResponse(JSONArray response) {
-                //파라미터로 응답받은 결과 JsonArray를 분석
-                itemList.clear();
-                homeAdapter.notifyDataSetChanged();
-                Log.d("길이 : ",String.valueOf(response.length()));
-                try {
-                    for(int i=0;i<response.length();i++){
-                        JSONObject jsonObject= response.getJSONObject(i);
-                        String name = jsonObject.getString("itemName"); //no가 문자열이라서 바꿔야함.
-                        Log.d("스트이름 : ",name);
-                        String so_birth=jsonObject.getString("itemSolarBirth");
-                        Log.d("스트양력 : ",so_birth);
-                        String lu_birth=jsonObject.getString("itemLunarBirth");
-                        Log.d("스트음력 : ",lu_birth);
-                        String memo=jsonObject.getString("itemMemo");
-                        Log.d("스트메모 : ",memo);
-                        String group = jsonObject.getString("itemGroup");
-                        Log.d("스트그룹: ",group);
-                        int is_alram_on=jsonObject.getInt("itemAlramOn");
-                        Log.d("스트알람 : ",String.valueOf(is_alram_on));
-                        ItemData itemData= new ItemData(name, group,so_birth, lu_birth, memo, is_alram_on); // 첫 번째 매개변수는 몇번째에 추가 될지, 제일 위에 오도록
-                        itemList.add(itemData);
-                        homeAdapter.notifyItemInserted(i);
-                    }
-                } catch (JSONException e) {e.printStackTrace();}
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity().getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-        //실제 요청 작업을 수행해주는 요청큐 객체 생성
-        RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
-        //요청큐에 요청 객체 생성
-        requestQueue.add(jsonArrayRequest);
-    }
-     */
 
 }

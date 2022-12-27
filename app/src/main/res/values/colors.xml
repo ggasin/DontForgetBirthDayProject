@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="title_blue">#31A9FC</color>
     <color name="button_click">#8031A9E6</color>
+    <color name="light_gray">#DCDCDC</color>
+    <color name="white_smoke">#F5F5F5</color>
+    <color name="more_gray">#A0A0A0</color>
 </resources>

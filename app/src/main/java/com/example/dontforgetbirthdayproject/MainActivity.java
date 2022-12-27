@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment fragmentHome = new HomeFragment();
     private MyPageFragement fragmentMyPage = new MyPageFragement();
     private AddItemFragment fragmentAddItem = new AddItemFragment();
+    private ItemDetailFragment fragmentItemDetail = new ItemDetailFragment();
     private RadioButton mpAlramOne,mpAlramThree,mpAlramSeven;
-    String userId,selectedGroup;
+    String userId,selectedGroup,itemName,itemSolarBirth,itemlunarBirth,itemMemo,itemGroup;
     boolean isAlramOne,isAlramThree,isAlramSeven;
     //현재 시간,분 변수선언
     int currHour, currMinute;
@@ -86,14 +88,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             switch (menuItem.getItemId()) {
-                case R.id.setting_menu:
-                    Toast.makeText(getApplicationContext(),"미구현",Toast.LENGTH_SHORT).show();
-                    break;
                 case R.id.home_menu:
-                    HomeFragment homeFragment = new HomeFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("userId",userId);
-                    homeFragment.setArguments(bundle);
                     transaction.replace(R.id.frameLayout, fragmentHome).commit();
                     break;
                 case R.id.mypage_menu:
@@ -107,16 +102,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFragmentChange(int index){
-        if(index==0){
+        if(index==0){ //홈프레그먼트로 이동
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentHome).commit();
         }
-        else if(index==1){
+        else if(index==1){ //아이템 추가 프레그먼트로 이동
             Log.d("selectedGroup on Main",selectedGroup);
-            Bundle bundle = new Bundle();
-            bundle.putString("userId",userId);
-            AddItemFragment addItemFragment = new AddItemFragment();
-            addItemFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentAddItem).commit();
+        } else if(index==2){
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentItemDetail).commit();
         }
     }
 }
