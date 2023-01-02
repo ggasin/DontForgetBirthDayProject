@@ -136,10 +136,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
-                android:checkedButton="@id/mp_alram_one_btn">
+                android:checkedButton="@id/mp_alarm_one_btn">
 
                 <RadioButton
-                    android:id="@+id/mp_alram_one_btn"
+                    android:id="@+id/mp_alarm_one_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
@@ -148,7 +148,7 @@
                     android:textSize="25dp" />
 
                 <RadioButton
-                    android:id="@+id/mp_alram_three_btn"
+                    android:id="@+id/mp_alarm_three_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
@@ -157,7 +157,7 @@
                     android:textSize="25dp" />
 
                 <RadioButton
-                    android:id="@+id/mp_alram_seven_btn"
+                    android:id="@+id/mp_alarm_seven_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"

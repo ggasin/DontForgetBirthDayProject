@@ -5,10 +5,7 @@
     <item
         android:width="200dp"
         android:height="200dp"
-        android:drawable="@drawable/temp"
+        android:drawable="@drawable/profile_man_icon"
         />
-    <stroke
-        android:width="2dp"
-        android:color="@color/black"/>
-    <corners android:radius="5dp" />
+
 </layer-list>

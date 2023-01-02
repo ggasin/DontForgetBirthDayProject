@@ -38,11 +38,34 @@
 
         </LinearLayout>
 
+        <RadioGroup
+            android:id="@+id/add_gender_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/add_gender_man"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="남"
+               android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/add_gender_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="여" />
+        </RadioGroup>
+
         <LinearLayout
             android:id="@+id/add_birth_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -60,7 +83,7 @@
             android:id="@+id/add_lunar_ly"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <CheckBox
@@ -84,7 +107,7 @@
             android:id="@+id/add_memo_ly"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:gravity="center|top"
             android:orientation="horizontal">
 

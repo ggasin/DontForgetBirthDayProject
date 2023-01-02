@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ import android.widget.Toast;
 public class MyPageFragement extends Fragment {
     MainActivity mainActivity;
     private TextView logoutTextBtn;
-    private RadioGroup alramRadioGroup;
+    private RadioGroup alarmRadioGroup;
     //onAttach 는 fragment가 activity에 올라온 순간
     @Override
     public void onAttach(Context context) {
@@ -48,18 +47,18 @@ public class MyPageFragement extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_my_page_fragement, container, false);
         logoutTextBtn = rootView.findViewById(R.id.mp_logout_text_btn);
-        alramRadioGroup = rootView.findViewById(R.id.mp_radio_group);
+        alarmRadioGroup = rootView.findViewById(R.id.mp_radio_group);
 
-        alramRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        alarmRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                if(checkedId == R.id.mp_alram_one_btn) {
-                    mainActivity.isAlramOne = true;
+                if(checkedId == R.id.mp_alarm_one_btn) {
+                    mainActivity.isAlarmOne = true;
                 }
-                else if(checkedId == R.id.mp_alram_three_btn) {
-                    mainActivity.isAlramThree = true;
-                } else if(checkedId == R.id.mp_alram_seven_btn) {
-                    mainActivity.isAlramSeven = true;
+                else if(checkedId == R.id.mp_alarm_three_btn) {
+                    mainActivity.isAlarmThree = true;
+                } else if(checkedId == R.id.mp_alarm_seven_btn) {
+                    mainActivity.isAlarmSeven = true;
                 }
             }
         });

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +37,9 @@ public class AddItemFragment extends Fragment {
     private EditText add_name_et,add_solar_birth_et,add_memo_et;
     private TextView add_group_t;
     private CheckBox add_lunar_chk;
-    String selectedGroup;
+    private RadioButton addGenderMan,addGenderWoman;
+    private RadioGroup addGenderGroup;
+    String selectedGroup,gender="남";
     boolean isValidBirth = false; //유효한 생년월일인지 파악
     //onAttach 는 fragment가 activity에 올라온 순간
     @Override
@@ -67,12 +71,25 @@ public class AddItemFragment extends Fragment {
         add_solar_birth_et = rootView.findViewById(R.id.add_solar_birth_et);
         add_memo_et = rootView.findViewById(R.id.add_memo_et);
         add_lunar_chk = rootView.findViewById(R.id.add_lunar_check_box);
+        addGenderMan = rootView.findViewById(R.id.add_gender_man);
+        addGenderWoman = rootView.findViewById(R.id.add_gender_woman);
+        addGenderGroup = rootView.findViewById(R.id.add_gender_radio_group);
 
         //선택된 그룹 이름으로 group text 초기화
         add_group_t.setText(selectedGroup);
         Log.d("selectedGroup on Add1",selectedGroup);
 
-
+        //라디오그룹 체크 이벤트
+        addGenderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i==R.id.add_gender_man){
+                    gender = "남";
+                } else {
+                    gender = "여";
+                }
+            }
+        });
         //완료 버튼 이벤트
         add_complete_btn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -137,7 +154,7 @@ public class AddItemFragment extends Fragment {
                         }
                     }
                 };
-                ItemAddRequest itemAddRequest = new ItemAddRequest(id,group,name,solarBirth,lunarBirth,memo,1,responseListener);
+                ItemAddRequest itemAddRequest = new ItemAddRequest(id,group,name,solarBirth,lunarBirth,memo,1,gender,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                 queue.add(itemAddRequest);
 

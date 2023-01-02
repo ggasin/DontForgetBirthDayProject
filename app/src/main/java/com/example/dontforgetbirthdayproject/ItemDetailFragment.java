@@ -1,12 +1,11 @@
 package com.example.dontforgetbirthdayproject;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -23,9 +22,13 @@ public class ItemDetailFragment extends Fragment {
 
     MainActivity mainActivity;
     private TextView itemDetailName,itemDetailSolar,itemDetailLunar,itemDetailGroup;
-    private EditText itemDetailMemo;
-    private ImageButton itemDetailCloseBtn;
+    private EditText itemDetailMemo,itemDetailEditSolar,itemDetailEditLunar,itemDetailEditName;
+    private ImageButton itemDetailCloseBtn,itemDetailDeleteBtn,itemDetailAlterBtn;
     private LinearLayout itemDetailMemoLy;
+    private Button itemDetailCompleteBtn,itemDetailCalcelBtn;
+    private Spinner itemDetailGroupSpinner;
+    private LinearLayout itemDetailBtnLy;
+    private ImageView itemDetailProfile;
     //onAttach 는 fragment가 activity에 올라온 순간
     @Override
     public void onAttach(Context context) {
@@ -49,13 +52,13 @@ public class ItemDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-    private ImageView profile;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_item_detail, container, false);
-        profile = rootView.findViewById(R.id.item_detail_profile_iv);
+        itemDetailProfile = rootView.findViewById(R.id.item_detail_profile_iv);
         itemDetailName = rootView.findViewById(R.id.item_detail_name_tv);
         itemDetailSolar = rootView.findViewById(R.id.item_detail_solar_tv);
         itemDetailLunar = rootView.findViewById(R.id.item_detail_lunar_tv);
@@ -63,16 +66,89 @@ public class ItemDetailFragment extends Fragment {
         itemDetailGroup = rootView.findViewById(R.id.item_detail_group_tv);
         itemDetailCloseBtn = rootView.findViewById(R.id.item_detail_close_btn);
         itemDetailMemoLy = rootView.findViewById(R.id.item_detail_memo_ly);
+        itemDetailAlterBtn = rootView.findViewById(R.id.item_detail_alter_btn);
+        itemDetailDeleteBtn = rootView.findViewById(R.id.item_detail_delete_btn);
+        itemDetailCompleteBtn = rootView.findViewById(R.id.item_detail_complete_btn);
+        itemDetailCalcelBtn = rootView.findViewById(R.id.item_detail_cancel_btn);
+        itemDetailEditName = rootView.findViewById(R.id.item_detail_edit_name);
+        itemDetailEditSolar = rootView.findViewById(R.id.item_detail_edit_solar);
+        itemDetailEditLunar = rootView.findViewById(R.id.item_detail_edit_lunar);
+        itemDetailGroupSpinner = rootView.findViewById(R.id.item_detail_group_spinner);
+        itemDetailBtnLy = rootView.findViewById(R.id.item_detail_btn_ly);
+        itemDetailMemo = rootView.findViewById(R.id.item_detail_memo_et);
 
+        //사용자 정보로 세팅
+        itemDetailProfile.setImageResource(mainActivity.profile_id);
         itemDetailName.setText(mainActivity.itemName);
         itemDetailGroup.setText(mainActivity.itemGroup);
         itemDetailSolar.setText(mainActivity.itemSolarBirth);
         itemDetailLunar.setText(mainActivity.itemlunarBirth);
-        itemDetailMemo = rootView.findViewById(R.id.item_detail_memo_et);
 
-        itemDetailMemoLy.setBackgroundResource(R.drawable.memo_border);//배경색 설정
+
+        itemDetailMemoLy.setBackgroundResource(R.drawable.memo_cant_edit_border);//배경색 설정
         itemDetailMemo.setEnabled(false);
 
+        //삭제 버튼
+        itemDetailDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //수정 버튼
+        itemDetailAlterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemDetailName.setVisibility(View.GONE);
+                itemDetailGroup.setVisibility(View.GONE);
+                itemDetailSolar.setVisibility(View.GONE);
+                itemDetailLunar.setVisibility(View.GONE);
+                itemDetailEditName.setVisibility(View.VISIBLE);
+                itemDetailEditSolar.setVisibility(View.VISIBLE);
+                itemDetailEditLunar.setVisibility(View.VISIBLE);
+                itemDetailGroupSpinner.setVisibility(View.VISIBLE);
+                itemDetailBtnLy.setVisibility(View.VISIBLE);
+                itemDetailMemoLy.setBackgroundResource(R.drawable.memo_can_edit_border);
+                itemDetailMemo.setEnabled(true);
+
+            }
+        });
+        //완료 버튼
+        itemDetailCompleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                itemDetailName.setVisibility(View.GONE);
+                itemDetailGroup.setVisibility(View.GONE);
+                itemDetailSolar.setVisibility(View.GONE);
+                itemDetailLunar.setVisibility(View.GONE);
+                itemDetailEditName.setVisibility(View.VISIBLE);
+                itemDetailEditSolar.setVisibility(View.VISIBLE);
+                itemDetailEditLunar.setVisibility(View.VISIBLE);
+                itemDetailGroupSpinner.setVisibility(View.VISIBLE);
+                itemDetailBtnLy.setVisibility(View.VISIBLE);
+                itemDetailMemoLy.setBackgroundResource(R.drawable.memo_cant_edit_border);//배경색 설정
+                itemDetailMemo.setEnabled(false);
+            }
+        });
+        //취소 버튼
+        itemDetailCalcelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemDetailName.setVisibility(View.VISIBLE);
+                itemDetailGroup.setVisibility(View.VISIBLE);
+                itemDetailSolar.setVisibility(View.VISIBLE);
+                itemDetailLunar.setVisibility(View.VISIBLE);
+                itemDetailEditName.setVisibility(View.GONE);
+                itemDetailEditSolar.setVisibility(View.GONE);
+                itemDetailEditLunar.setVisibility(View.GONE);
+                itemDetailGroupSpinner.setVisibility(View.GONE);
+                itemDetailBtnLy.setVisibility(View.GONE);
+                itemDetailMemoLy.setBackgroundResource(R.drawable.memo_cant_edit_border);
+                itemDetailMemo.setText(mainActivity.itemMemo);
+                itemDetailMemo.setEnabled(false);
+            }
+        });
         //닫기 버튼
         itemDetailCloseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +157,7 @@ public class ItemDetailFragment extends Fragment {
             }
         });
 
-        //프로필 모서리 둥글게 하려면 setClipToOutline true로 둬야함
-        profile.setClipToOutline(true);
+
         return rootView;
     }
     @Override

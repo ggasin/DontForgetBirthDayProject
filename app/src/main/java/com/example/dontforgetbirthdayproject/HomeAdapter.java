@@ -1,13 +1,13 @@
 package com.example.dontforgetbirthdayproject;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +20,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
     private Context context;
     private ArrayList<ItemData> arrayList;
     OnItemClickListener listener;
+
     public HomeAdapter(Context context,ArrayList<ItemData> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
@@ -36,15 +37,30 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+        holder.iv_profile.setImageResource(arrayList.get(position).getIv_profile());
         holder.tv_group.setText(arrayList.get(position).getTv_item_group());
         holder.tv_name.setText(arrayList.get(position).getTv_item_name());
         holder.tv_so_birth.setText(arrayList.get(position).getTv_item_solar_birth());
         holder.tv_lu_birth.setText(arrayList.get(position).getTv_item_lunar_birth());
         holder.tv_memo.setText(arrayList.get(position).getTv_item_memo());
-        if(arrayList.get(position).getItem_alram_on()==0){
-            holder.sw_alram_on.setChecked(false);
+        holder.tv_so_dday.setText(arrayList.get(position).getTv_item_so_dday());
+        holder.tv_lu_dday.setText(arrayList.get(position).getTv_item_lu_dday());
+
+        holder.sw_alarm_on.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
+            }
+        });
+
+        if(arrayList.get(position).getItem_alarm_on()==0){
+            holder.sw_alarm_on.setChecked(false);
         } else {
-            holder.sw_alram_on.setChecked(true);
+            holder.sw_alarm_on.setChecked(true);
         }
         holder.itemView.setTag(position);
 
@@ -81,25 +97,27 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
             listener.onItemClick(holder,view,position);
         }
     }
+
+
     public ItemData getItem(int position){
         return arrayList.get(position);
     }
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
 
-        protected TextView tv_group;
-        protected TextView tv_name;
-        protected TextView tv_memo;
-        protected TextView tv_so_birth;
-        protected TextView tv_lu_birth;
-        protected Switch sw_alram_on;
+    public class CustomViewHolder extends RecyclerView.ViewHolder {
+        protected ImageView iv_profile;
+        protected TextView tv_group,tv_name,tv_memo,tv_so_birth,tv_lu_birth,tv_so_dday,tv_lu_dday;
+        protected Switch sw_alarm_on;
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tv_group = (TextView) itemView.findViewById(R.id.tv_group);
-            this.tv_name = (TextView) itemView.findViewById(R.id.tv_name);
-            this.tv_so_birth = (TextView) itemView.findViewById(R.id.tv_so_birth);
-            this.tv_lu_birth = (TextView) itemView.findViewById(R.id.tv_lu_birth);
-            this.tv_memo = (TextView) itemView.findViewById(R.id.tv_memo);
-            this.sw_alram_on = (Switch) itemView.findViewById(R.id.sw_alram_btn);
+            this.iv_profile = (ImageView) itemView.findViewById(R.id.recycler_item_profile_iv);
+            this.tv_group = (TextView) itemView.findViewById(R.id.recycler_item_group_tv);
+            this.tv_name = (TextView) itemView.findViewById(R.id.recycler_item_name_tv);
+            this.tv_so_birth = (TextView) itemView.findViewById(R.id.recycler_item_so_birth_tv);
+            this.tv_lu_birth = (TextView) itemView.findViewById(R.id.recycler_item_lu_birth_tv);
+            this.tv_memo = (TextView) itemView.findViewById(R.id.recycler_item_memo_tv);
+            this.sw_alarm_on = (Switch) itemView.findViewById(R.id.sw_alarm_btn);
+            this.tv_so_dday = (TextView) itemView.findViewById(R.id.recycler_item_so_dday_tv);
+            this.tv_lu_dday = (TextView) itemView.findViewById(R.id.recycler_item_lu_dday_tv);
 
             // 아이템 클릭 이벤트 처리.
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +129,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
                     }
                 }
             });
+
 
         }
     }

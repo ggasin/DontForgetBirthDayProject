@@ -1,31 +1,24 @@
 package com.example.dontforgetbirthdayproject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalTime;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     // 뒤로가기 이벤트 핸들러 변수
@@ -41,15 +34,16 @@ public class MainActivity extends AppCompatActivity {
     private MyPageFragement fragmentMyPage = new MyPageFragement();
     private AddItemFragment fragmentAddItem = new AddItemFragment();
     private ItemDetailFragment fragmentItemDetail = new ItemDetailFragment();
-    private RadioButton mpAlramOne,mpAlramThree,mpAlramSeven;
+    private RadioButton mpAlarmOne, mpAlarmThree, mpAlarmSeven;
     String userId,selectedGroup,itemName,itemSolarBirth,itemlunarBirth,itemMemo,itemGroup;
-    boolean isAlramOne,isAlramThree,isAlramSeven;
+    boolean isAlarmOne, isAlarmThree, isAlarmSeven;
+    int profile_id;
     //현재 시간,분 변수선언
     int currHour, currMinute;
     //시스템에서 알람 서비스를 제공하도록 도와주는 클래스
     //특정 시점에 알람이 울리도록 도와준다
     private AlarmManager alarmManager;
-    @RequiresApi(api = Build.VERSION_CODES.O) //이 코드는 애너테이션으로 아래 함수를 사용할 때 필요한 최소 API를 명시된 API 레벨보다 낮으면 오류가 발생하는 역할을 한다.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,22 +61,19 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new ItemSelectedListener());
         bottomNavigationView.setSelectedItemId(R.id.home_menu);
 
-        mpAlramOne = findViewById(R.id.mp_alram_one_btn);
-        mpAlramThree = findViewById(R.id.mp_alram_three_btn);
-        mpAlramSeven = findViewById(R.id.mp_alram_seven_btn);
+        mpAlarmOne = findViewById(R.id.mp_alarm_one_btn);
+        mpAlarmThree = findViewById(R.id.mp_alarm_three_btn);
+        mpAlarmSeven = findViewById(R.id.mp_alarm_seven_btn);
 
 
 
-        //현재 시간기준으로 몇시 몇분인지 구하기
-        LocalTime now = LocalTime.now();
-        currHour = now.getHour();
-        currMinute = now.getMinute();
         //푸시알림을 보내기 위해, 시스템에서 알림 서비스를 생성해주는 코드
         alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 
 
 
     }
+    //프래그먼트 선택 리스너
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -100,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
+    //홈프래그먼트에서 다른 프래그먼트 불러올 때 이용
     public void onFragmentChange(int index){
         if(index==0){ //홈프레그먼트로 이동
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentHome).commit();
@@ -110,6 +101,51 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentAddItem).commit();
         } else if(index==2){
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentItemDetail).commit();
+
         }
     }
+
+    //알람매니저에 알람등록 처리
+    public void setNotice(int hour,int minute,int id,String content,int requestCode) {
+
+        //알람을 수신할 수 있도록 하는 리시버로 인텐트 요청
+        Intent receiverIntent = new Intent(this, NotificationReceiver.class);
+        receiverIntent.putExtra("content", content);
+        receiverIntent.putExtra("requestCode", requestCode);
+        receiverIntent.putExtra("id",id);
+
+        /**
+         * PendingIntent란?
+         * - Notification으로 작업을 수행할 때 인텐트가 실행되도록 합니다.
+         * Notification은 안드로이드 시스템의 NotificationManager가 Intent를 실행합니다.
+         * 즉 다른 프로세스에서 수행하기 때문에 Notification으로 Intent수행시 PendingIntent의 사용이 필수 입니다.
+         */
+
+        /**
+         * 브로드캐스트로 실행될 pendingIntent선언 한다.
+         * Intent가 새로 생성될때마다(알람을 등록할 때마다) intent값을 업데이트 시키기 위해, FLAG_UPDATE_CURRENT 플래그를 준다
+         * 이전 알람을 취소시키지 않으려면 requestCode를 다르게 줘야 한다.
+         * */
+
+        PendingIntent pendingIntent;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            pendingIntent= PendingIntent.getBroadcast(this, requestCode, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_MUTABLE);
+        } else {
+            pendingIntent= PendingIntent.getBroadcast(this, requestCode, receiverIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
+
+        //date타입으로 변경된 알람시간을 캘린더 타임에 등록
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY,hour);
+        calendar.set(Calendar.MINUTE,minute);
+
+        //알람시간 설정
+        //param 1)알람의 타입
+        //param 2)알람이 울려야 하는 시간(밀리초)을 나타낸다.
+        //param 3)알람이 울릴 때 수행할 작업을 나타냄
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+
+    }
+
 }
