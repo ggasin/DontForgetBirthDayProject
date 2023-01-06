@@ -149,6 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String userName = et_name.getText().toString();
                 String userPwdCheck = et_pwd_chk.getText().toString();
                 String userPhone = et_phone.getText().toString();
+                String group = "전체";
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -176,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-                RegisterRequest registerRequest = new RegisterRequest(userID,userPwd,userName,userPhone,responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(userID,userPwd,userName,userPhone,group,responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
 

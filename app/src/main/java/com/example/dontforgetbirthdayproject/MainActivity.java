@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemDetailFragment fragmentItemDetail = new ItemDetailFragment();
     private RadioButton mpAlarmOne, mpAlarmThree, mpAlarmSeven;
     String userId,selectedGroup,itemName,itemSolarBirth,itemlunarBirth,itemMemo,itemGroup;
+    int itemClickPosition;
     boolean isAlarmOne, isAlarmThree, isAlarmSeven;
     int profile_id;
     //현재 시간,분 변수선언

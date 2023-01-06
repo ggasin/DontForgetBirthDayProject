@@ -9,18 +9,15 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterRequest extends StringRequest {
+public class GroupAddRequest extends StringRequest {
 
     //서버 url 설정(php 파일 연동)
-    final static private String URL = "http://dfmbd.ivyro.net/Register.php";
+    final static private String URL = "http://dfmbd.ivyro.net/GroupAdd.php";
     private Map<String,String> map;
-    public RegisterRequest(String userID, String userPassword , String userName, String userPhone, String myGroup,Response .Listener<String> listener){
+    public GroupAddRequest(String userId, String myGroup , Response.Listener<String> listener){
         super(Method.POST, URL,listener,null);
         map = new HashMap<>();
-        map.put("userID",userID);
-        map.put("userPhone",userPhone);
-        map.put("userPassword",userPassword);
-        map.put("userName",userName);
+        map.put("userId",userId);
         map.put("myGroup",myGroup);
 
     }
