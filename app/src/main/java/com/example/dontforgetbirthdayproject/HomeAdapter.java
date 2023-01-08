@@ -64,14 +64,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.CustomViewHold
         }
         holder.itemView.setTag(position);
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                remove(holder.getBindingAdapterPosition());
-                return true;
-            }
-        });
-
     }
 
     @Override

@@ -5,9 +5,10 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/group_recycler_ly"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:background="@drawable/item_ly_border"
+        android:background="@drawable/group_item_not_selected"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent">
@@ -23,7 +24,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="전체"
-                android:textSize="15dp" />
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

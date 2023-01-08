@@ -3,14 +3,17 @@ package com.example.dontforgetbirthdayproject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -52,6 +55,8 @@ public class HomeFragment extends Fragment  {
     public void onAttach(Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity) getActivity();
+
+
     }
 
     @Override
@@ -66,7 +71,7 @@ public class HomeFragment extends Fragment  {
     private RecyclerView itemRecyclerView,groupRecyclerView;
     private LinearLayoutManager ItemLinearLayoutManager,GroupLinearLayoutManager;
     private TextView textView;
-    private Spinner group_spinner;
+
     private Button item_add_btn;
     private ImageButton itemAddBtn;
 
@@ -101,13 +106,14 @@ public class HomeFragment extends Fragment  {
         groupList = new ArrayList<>();
 
         textView = rootView.findViewById(R.id.textView3);
-        group_spinner = rootView.findViewById(R.id.home_group_spinner);
         itemAddBtn = rootView.findViewById(R.id.item_add_btn);
         homeAdapter = new HomeAdapter(getActivity().getApplicationContext(),itemList);
         groupAdapter = new GroupAdapter(getActivity().getApplicationContext(),groupList);
 
+
         //db로부터 데이터를 가져와 recyclerView에 바인딩
-        loadDB(loadItemURL, group_spinner.getSelectedItem().toString());
+
+
         loadGroupFromDB(loadGroupURL);
 
         //아이템 클릭 이벤트
@@ -127,20 +133,27 @@ public class HomeFragment extends Fragment  {
             }
         });
 
-        //그룹 저장한 spinner 이벤트
-        group_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        groupAdapter.setOnGroupClicklistener(new GetGroupPositionListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                selectedGroup = adapterView.getItemAtPosition(position).toString();
-                mainActivity.selectedGroup = selectedGroup;
-                loadDB(loadItemURL,adapterView.getItemAtPosition(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+            public void getGroupPosition(int position) {
+                loadDB(loadItemURL,groupAdapter.getItem(position).getGroup());
+                mainActivity.selectedGroup = groupAdapter.getItem(position).getGroup().toString();
+                Log.d("선택된 그룹",groupAdapter.getItem(position).getGroup().toString());
             }
         });
+
+        //그룹의 첫번째가 선택되도록 함. findViewHolderForAdapterPosition을 이용하려는데 자꾸 안됨.
+        //이유는 groupAdapter에서 아직 recyclerview에 attach 되어있지 않아서.
+        //이 기능에 살짝의 딜레이를 넣어줬더니 작동함.
+        //23-01-09 아직 문제 해결 x findViewHolderForAdapterPosition으로 하면 선택됐던 아이템이 화면에서 사라진상태로 다른 화면으로 갔다오면
+        //어플 꺼짐.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                groupRecyclerView.findViewHolderForLayoutPosition(GroupLinearLayoutManager.findFirstCompletelyVisibleItemPosition()).itemView.performClick();
+            }
+        },100);
 
 
 
@@ -192,8 +205,6 @@ public class HomeFragment extends Fragment  {
 
                                 break;
                             case R.id.add_item_menu:
-                                Log.d("selectedGroup on home1",selectedGroup);
-                                Log.d("selectedGroup on home1",mainActivity.selectedGroup);
                                 mainActivity.onFragmentChange(1);
                                 break;
                             default:

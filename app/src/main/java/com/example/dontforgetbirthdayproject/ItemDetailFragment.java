@@ -47,10 +47,9 @@ public class ItemDetailFragment extends Fragment {
     private ImageButton itemDetailCloseBtn,itemDetailDeleteBtn,itemDetailAlterBtn;
     private LinearLayout itemDetailMemoLy;
     private Button itemDetailCompleteBtn,itemDetailCalcelBtn;
-    private Spinner itemDetailGroupSpinner;
     private LinearLayout itemDetailBtnLy;
     private ImageView itemDetailProfile;
-    String itemDetailSelectedGroup;
+
     boolean isValidBirth = false;
     //onAttach 는 fragment가 activity에 올라온 순간
     @Override
@@ -96,7 +95,7 @@ public class ItemDetailFragment extends Fragment {
         itemDetailEditName = rootView.findViewById(R.id.item_detail_edit_name);
         itemDetailEditSolar = rootView.findViewById(R.id.item_detail_edit_solar);
         itemDetailEditLunar = rootView.findViewById(R.id.item_detail_edit_lunar);
-        itemDetailGroupSpinner = rootView.findViewById(R.id.item_detail_group_spinner);
+
         itemDetailBtnLy = rootView.findViewById(R.id.item_detail_btn_ly);
         itemDetailMemo = rootView.findViewById(R.id.item_detail_memo_et);
 
@@ -112,17 +111,7 @@ public class ItemDetailFragment extends Fragment {
 
         itemList = new ArrayList<>();
         homeAdapter = new HomeAdapter(getActivity().getApplicationContext(),itemList);
-        //그룹 선택 이벤트
-        itemDetailGroupSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                itemDetailSelectedGroup = adapterView.getItemAtPosition(position).toString();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
 
         //삭제 버튼
         itemDetailDeleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -192,6 +181,7 @@ public class ItemDetailFragment extends Fragment {
 
                LocalDate now = LocalDate.now(); //현재 날짜 가져오기
                String name = itemDetailEditName.getText().toString();
+               String group = itemDetailGroup.getText().toString();
                String beforeName = itemDetailName.getText().toString();
                String solar = itemDetailEditSolar.getText().toString();
                String lunar = itemDetailEditLunar.getText().toString();
@@ -242,7 +232,7 @@ public class ItemDetailFragment extends Fragment {
                    }
                };
 
-               ItemUpdateRequest itemUpdateRequest = new ItemUpdateRequest(mainActivity.userId, itemDetailSelectedGroup,name,
+               ItemUpdateRequest itemUpdateRequest = new ItemUpdateRequest(mainActivity.userId, group,name,
                        beforeName,solar,lunar,memo,responseListener);
                RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
                queue.add(itemUpdateRequest);
@@ -281,7 +271,6 @@ public class ItemDetailFragment extends Fragment {
     public void editModeOn(){
         //TextView 없애기
         itemDetailName.setVisibility(View.GONE);
-        itemDetailGroup.setVisibility(View.GONE);
         itemDetailSolar.setVisibility(View.GONE);
         itemDetailLunar.setVisibility(View.GONE);
         //EditText와 완료,취소 버튼 보이기
@@ -291,21 +280,17 @@ public class ItemDetailFragment extends Fragment {
         itemDetailEditSolar.setText(itemDetailSolar.getText().toString());
         itemDetailEditLunar.setVisibility(View.VISIBLE);
         itemDetailEditLunar.setText(itemDetailLunar.getText().toString());
-        itemDetailGroupSpinner.setVisibility(View.VISIBLE);
         itemDetailBtnLy.setVisibility(View.VISIBLE);
-
         itemDetailMemoLy.setBackgroundResource(R.drawable.memo_can_edit_border);
         itemDetailMemo.setEnabled(true);
     }
     public void editModeOff(){
         itemDetailName.setVisibility(View.VISIBLE);
-        itemDetailGroup.setVisibility(View.VISIBLE);
         itemDetailSolar.setVisibility(View.VISIBLE);
         itemDetailLunar.setVisibility(View.VISIBLE);
         itemDetailEditName.setVisibility(View.GONE);
         itemDetailEditSolar.setVisibility(View.GONE);
         itemDetailEditLunar.setVisibility(View.GONE);
-        itemDetailGroupSpinner.setVisibility(View.GONE);
         itemDetailBtnLy.setVisibility(View.GONE);
         itemDetailMemoLy.setBackgroundResource(R.drawable.memo_cant_edit_border);
         itemDetailMemo.setEnabled(false);

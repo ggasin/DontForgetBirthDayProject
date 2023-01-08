@@ -23,14 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Spinner
-                android:id="@+id/home_group_spinner"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:entries="@array/spinner_array"
-                android:spinnerMode="dropdown" />
-
             <View
 
                 android:layout_width="0dp"

@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentHome).commit();
         }
         else if(index==1){ //아이템 추가 프레그먼트로 이동
-            Log.d("selectedGroup on Main",selectedGroup);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentAddItem).commit();
+            Log.d("메인에서 선택된 그룹",selectedGroup);
         } else if(index==2){
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragmentItemDetail).commit();
 
